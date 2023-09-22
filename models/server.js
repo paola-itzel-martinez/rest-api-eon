@@ -1,7 +1,7 @@
-const express = require('express')
-const cors = require('cors')
-const fileUpload = require("express-fileupload")
-const { dbConnection } = require('../databse/config')
+const express = require("express");
+const cors = require("cors");
+const fileUpload = require("express-fileupload");
+const { dbConnection } = require("../databse/config");
 
 const RESPONSE_CODES = {
   CONTINUE: 100,
@@ -43,97 +43,127 @@ const RESPONSE_CODES = {
   BAD_GATEWAY: 502,
   SERVICE_UNAVAILABLE: 503,
   GATEWAY_TIMEOUT: 504,
-  HTTP_VERSION_NOT_SUPPORTED: 505
-}
+  HTTP_VERSION_NOT_SUPPORTED: 505,
+};
 
 class Server {
   constructor() {
-    this.app = express()
-    this.port = process.env.PORT
-    this.apiRoutes = {
+    this.app = express();
+    this.port = process.env.PORT;
+    (this.apiRoutes = {
       auth: {
-        url: '/api/auth',
-        path: '../routes/auth.routes'
+        url: "/api/auth",
+        path: "../routes/auth.routes",
       },
       categories: {
-        url: '/api/categories',
-        path: '../routes/categories.routes'
+        url: "/api/categories",
+        path: "../routes/categories.routes",
       },
       products: {
-        url: '/api/products',
-        path: '../routes/products.routes'
+        url: "/api/products",
+        path: "../routes/products.routes",
       },
       search: {
-        url: '/api/search',
-        path: '../routes/search.routes'
+        url: "/api/search",
+        path: "../routes/search.routes",
       },
       upload: {
-        url: '/api/upload',
-        path: '../routes/upload.routes'
+        url: "/api/upload",
+        path: "../routes/upload.routes",
       },
       users: {
-        url: '/api/users',
-        path: '../routes/users.routes'
-      }
-    },
-
-    this.dbConnect()
-    this.middlewars()
-    this.routes()
+        url: "/api/users",
+        path: "../routes/users.routes",
+      },
+      otorgantes: {
+        url: "/api/otorgantes",
+        path: "../routes/otorgantes/otorgantes.routes",
+      },
+      consultaEstatuses: {
+        url: "/api/consulta-estatuses",
+        path: "../routes/consultaEstatuses/consultaEstatuses.routes",
+      },
+      consultas: {
+        url: "/api/consultas",
+        path: "../routes/consultas/consultas.routes",
+      },
+      auditoriasComerciales: {
+        url: "/api/auditorias-comerciales",
+        path: "../routes/auditoriasComerciales/auditoriasComerciales.routes",
+      },
+    }),
+      this.dbConnect();
+    this.middlewars();
+    this.routes();
   }
 
-  async dbConnect(){
-    await dbConnection()
+  async dbConnect() {
+    await dbConnection();
   }
 
   middlewars() {
-    this.app.use(cors())
-    this.app.use(express.json())
-    this.app.use(express.static('public'))
-    this.app.use(fileUpload({
-      useTempFiles : true,
-      tempFileDir : '/tmp/',
-      createParentPath: true
-    }))
+    this.app.use(cors());
+    this.app.use(express.json());
+    this.app.use(express.static("public"));
+    this.app.use(
+      fileUpload({
+        useTempFiles: true,
+        tempFileDir: "/tmp/",
+        createParentPath: true,
+      }),
+    );
   }
 
   routes() {
-    this.app.use(
-      this.apiRoutes.auth.url,
-      require(this.apiRoutes.auth.path)
-    )
+    this.app.use(this.apiRoutes.auth.url, require(this.apiRoutes.auth.path));
 
     this.app.use(
       this.apiRoutes.categories.url,
-      require(this.apiRoutes.categories.path)
-    )
+      require(this.apiRoutes.categories.path),
+    );
 
     this.app.use(
       this.apiRoutes.products.url,
-      require(this.apiRoutes.products.path)
-    )
+      require(this.apiRoutes.products.path),
+    );
 
     this.app.use(
       this.apiRoutes.search.url,
-      require(this.apiRoutes.search.path)
-    )
+      require(this.apiRoutes.search.path),
+    );
 
     this.app.use(
       this.apiRoutes.upload.url,
-      require(this.apiRoutes.upload.path)
-    )
+      require(this.apiRoutes.upload.path),
+    );
+
+    this.app.use(this.apiRoutes.users.url, require(this.apiRoutes.users.path));
 
     this.app.use(
-      this.apiRoutes.users.url,
-      require(this.apiRoutes.users.path)
-    )
+      this.apiRoutes.otorgantes.url,
+      require(this.apiRoutes.otorgantes.path),
+    );
 
+    this.app.use(
+      this.apiRoutes.consultaEstatuses.url,
+      require(this.apiRoutes.consultaEstatuses.path),
+    );
+
+    this.app.use(
+      this.apiRoutes.consultas.url,
+      require(this.apiRoutes.consultas.path),
+    );
+
+    this.app.use(
+      this.apiRoutes.auditoriasComerciales.url,
+      require(this.apiRoutes.auditoriasComerciales.path),
+    );
   }
 
-  listen(){
+  listen() {
     this.app.listen(this.port, () => {
-      console.info(`Example app listening on PORT ${this.port}`)
-    })
+      console.info(`Example app listening on PORT ${this.port}`);
+    });
   }
 }
 
