@@ -91,6 +91,14 @@ class Server {
         url: "/api/auditorias-comerciales",
         path: "../routes/auditoriasComerciales/auditoriasComerciales.routes",
       },
+      clients: {
+        url: "/api/clients",
+        path: "../routes/clients/clients.routes",
+      },
+      folios: {
+        url: "/api/folios",
+        path: "../routes/folios/folios.routes",
+      },
     }),
       this.dbConnect();
     this.middlewars();
@@ -157,6 +165,16 @@ class Server {
     this.app.use(
       this.apiRoutes.auditoriasComerciales.url,
       require(this.apiRoutes.auditoriasComerciales.path),
+    );
+
+    this.app.use(
+      this.apiRoutes.clients.url,
+      require(this.apiRoutes.clients.path),
+    );
+
+    this.app.use(
+      this.apiRoutes.folios.url,
+      require(this.apiRoutes.folios.path),
     );
   }
 

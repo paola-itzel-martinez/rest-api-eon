@@ -57,7 +57,7 @@ const create = async ({ body }, response) => {
 
   try {
     for (let i = 0; i < recordsToCreate; i++) {
-      for (let year = 2022; year < 2024; year++) {
+      for (let year = 2022; year < 2023; year++) {
         const c0001_s1 = new Consulta({
           otorgante: "650d32355547d5ce52b3e477",
           status,

@@ -8,7 +8,9 @@ const otorganteController = require("./otorgante.controller");
 const uploadController = require("./upload.controller");
 const usersController = require("./users.controller");
 
-const auditoriasComercialesController = require("./auditoriasComerciales.controller");
+const auditoriasComercialesController = require("./auditoriasComerciales");
+const clientsController = require("./clients");
+const foliosController = require("./folios");
 
 module.exports = {
   authController,
@@ -21,4 +23,6 @@ module.exports = {
   uploadController,
   usersController,
   auditoriasComercialesController,
+  clientsController,
+  foliosController,
 };
