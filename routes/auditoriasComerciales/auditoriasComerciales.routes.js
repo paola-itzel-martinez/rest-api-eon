@@ -6,6 +6,12 @@ const middlewares = require("./auditoriasComerciales.middlewares");
 
 const router = Router();
 
-router.get(`/`, middlewares.getResume, controllers.getResume);
+router.get(`/yearly-resume`, middlewares.getResume, controllers.getResume);
+
+router.get(
+  `/monthly-resume`,
+  middlewares.getMonthlyResume,
+  controllers.getMonthlyResume,
+);
 
 module.exports = router;

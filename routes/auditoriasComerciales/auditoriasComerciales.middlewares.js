@@ -7,6 +7,13 @@ const getResume = [
   validateFields,
 ];
 
+const getMonthlyResume = [
+  check("otorgante", "otorgante is required").not().isEmpty(),
+  check("year", "year is required").not().isEmpty(),
+  validateFields,
+];
+
 module.exports = {
   getResume,
+  getMonthlyResume,
 };
