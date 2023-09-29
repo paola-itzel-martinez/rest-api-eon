@@ -11,6 +11,7 @@ const usersController = require("./users.controller");
 const auditoriasComercialesController = require("./auditoriasComerciales");
 const clientsController = require("./clients");
 const foliosController = require("./folios");
+const layoutsController = require("./layouts");
 
 module.exports = {
   authController,
@@ -25,4 +26,5 @@ module.exports = {
   auditoriasComercialesController,
   clientsController,
   foliosController,
+  layoutsController
 };
