@@ -99,6 +99,10 @@ class Server {
         url: "/api/folios",
         path: "../routes/folios/folios.routes",
       },
+      layouts: {
+        url: "/api/layouts",
+        path: "../routes/layouts/layouts.routes",
+      },
     }),
       this.dbConnect();
     this.middlewars();
@@ -175,6 +179,11 @@ class Server {
     this.app.use(
       this.apiRoutes.folios.url,
       require(this.apiRoutes.folios.path),
+    );
+
+    this.app.use(
+      this.apiRoutes.layouts.url,
+      require(this.apiRoutes.layouts.path),
     );
   }
 
